@@ -23,7 +23,8 @@ def root():
     loop_content = "<h3>Users online:</h3> <ul>"
     for i in online:
         if i != user:
-            e = escape(i)
+            e = str(i).replace("&", "&amp;").replace(">", "&gt;").replace("<", "&lt;").replace("'", "&#39;").replace('"', "&#34;")
+            # e = escape(i)
             print(e)
             loop_content += f'<a href="/{i}"><li>' + e + '</li></a>'
         
@@ -49,7 +50,9 @@ def root():
 @app.route("/<profile>")
 def profile(profile):
     returnhtml = ""
-    profile = escape(profile)
+    # profile = escape(profile)
+    profile = str(escape).replace("&", "&amp;").replace(">", "&gt;").replace("<", "&lt;").replace("'", "&#39;").replace('"', "&#34;")
+
     print(f"profile func {profile}", flush=True)
     if check_user(profile):
         if "auth" in request.cookies:
